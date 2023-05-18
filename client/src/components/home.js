@@ -92,7 +92,7 @@ function Home() {
                 <Grid xs={12}>
                     <Typography variant="h6" gutterBottom>ZabaGPT Hackaton</Typography>
                 </Grid>
-                <Grid xs={9}>
+                <Grid xs={6}>
                     <Box sx={{ mb: 2 }}>
                         <Grid xs={12}>
                             <Configurator
@@ -118,7 +118,7 @@ function Home() {
                     </Box>
                 </Grid>
                 <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }}></Divider>
-                <Grid xs={3}>
+                <Grid xs={6}>
                     <Box sx={{ mb: 2 }}>
                     <Grid xs={12} textAlign={"left"}>
                 <Typography variant="button" display="block" gutterBottom fontWeight={"bold"}> AI ODGOVOR</Typography>
