@@ -48,6 +48,7 @@ function Configurator({handleTemperatureChange, handleRequestTypeChange}) {
                     >
                         <FormControlLabel value="CODE_REVIEW" control={<Radio />} label="Analiza koda" />
                         <FormControlLabel value="CODE_REFACTOR" control={<Radio />} label="Refaktoriranje koda" />
+                        <FormControlLabel value="CODE_ISSUE_FIX" control={<Radio />} label="Popravak koda" />
                         <FormControlLabel value="BASIC_PROMPT" control={<Radio />} label="Razgovor sa Chat GPT" />
                     </RadioGroup>
                 </FormControl>

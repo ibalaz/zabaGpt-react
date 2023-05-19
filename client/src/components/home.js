@@ -11,6 +11,7 @@ import Alert from '@mui/material/Alert';
 import Axios from 'axios';
 import Configurator from './configurator';
 import PromptEditor from './promptEditor';
+import ReviewCode from './reviewCode';
 import Review from './review';
 import '../style/Home.css';
 
@@ -29,6 +30,7 @@ function Home() {
     const [code, setCode] = useState(
         `function add(a, b) {\n  return a + b;\n}`
     );
+    const [codeIssue, setCodeIssue] = useState("Fix this code");
     const [basicPrompt, setBasicPrompt] = useState("Tell me your name");
 
     //review
@@ -41,6 +43,10 @@ function Home() {
         setLoading(false);
     }, []);
 
+
+    const handleCodeIssueChange = (data) => {
+        setCodeIssue(data);
+    }
 
     const handleSnippetEditorChange = (data) => {
         setCode(data);
@@ -68,7 +74,8 @@ function Home() {
                     requestType: requestType
                 },
                 codeSnippet: code,
-                basicPrompt: basicPrompt
+                basicPrompt: basicPrompt,
+                codeIssue: codeIssue
             }).then((res) => {
                 if (res.data.success) {
                     setReview(res.data.review)
@@ -108,6 +115,7 @@ function Home() {
                             <PromptEditor key="basic-prompt-input" requestType={requestType} 
                             handleChange={handleSnippetEditorChange}
                             handleBasicPromptChange={handleBasicPromptChange}
+                            handleCodeIssueChange={handleCodeIssueChange}
                             ></PromptEditor>
                         </Grid>
                         <Grid xs={12}>
@@ -124,7 +132,8 @@ function Home() {
                 <Typography variant="button" display="block" gutterBottom fontWeight={"bold"}> AI ODGOVOR</Typography>
             </Grid>
                         <Grid xs={12}>
-                            {!error && !loading && <Review value={review} readonly></Review>}
+                            {!error && !loading && (requestType == 'CODE_REFACTOR' || requestType == 'CODE_ISSUE_FIX') && <ReviewCode review={review} readonly></ReviewCode>}
+                            {!error && !loading && (requestType == 'BASIC_PROMPT' || requestType == 'CODE_REVIEW') && <Review value={review} readonly></Review>}
                             {loading && <CircularProgress color="success" />}
                             {error && !loading && <Alert severity="error">{errorMessage}</Alert>}
                         </Grid>
